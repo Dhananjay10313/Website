@@ -47,6 +47,24 @@ We fine-tuned all models on the IMDB dataset, containing 50,000 labeled movie re
 
 Flower allows using SSL certificates for secure communication. The general steps for certificate creation involve generating keys and certificates using OpenSSL commands and a configuration file specifying domain name, organization, etc.
 
+* `openssl genrsa -out ca.key 4096`: This command generates a new private key (ca.key) with a size of 4096 bits for the Certificate Authority (CA).
+* `openssl req -new -x509 -key ca.key -sha256 -subj "/C=DE/ST=HH/O=CA, Inc." -days 365 -out ca.crt`: This command creates a self-signed certificate (ca.crt) using the generated key (ca.key). 
+    * `-new`: Creates a new certificate signing request (CSR).
+    * `-x509`: Creates a self-signed certificate.
+    * `-key ca.key`: Specifies the private key to use for signing.
+    * `-sha256`: Uses the SHA-256 hashing algorithm.
+    * `-subj "/C=DE/ST=HH/O=CA, Inc."`: Sets the subject information for the certificate, including Country (C), State (ST), and Organization (O). You can replace these values with your own details.
+    * `-days 365`: Sets the certificate validity period to 365 days.
+    * `-out ca.crt`: Specifies the output filename for the certificate (ca.crt).
+
+**Generating Server Key, CSR, and Certificate:**
+
+These steps are similar but involve creating a server key and certificate signed by the root CA we just created. You'll need a separate `certificate.conf` file for server-specific configurations (explained later).
+
+**Note:** These commands are for demonstration purposes only. In a production environment, you'll likely use a more secure way to manage certificates.
+
+**Remember to replace the placeholders with your own information.**
+
 **Further Exploration**
 
 This repository provides a foundation for exploring federated learning and fine-tuning LLM models. You can delve deeper into specific algorithms, experiment with different LLM models, or explore advanced federated learning techniques.
