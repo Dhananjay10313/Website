@@ -46,7 +46,7 @@ We fine-tuned all models on the IMDB dataset, containing 50,000 labeled movie re
 **SSL Certification with Flower**
 
 Flower allows using SSL certificates for secure communication. The general steps for certificate creation involve generating keys and certificates using OpenSSL commands and a configuration file specifying domain name, organization, etc.
-
+**Steps:**
 * `openssl genrsa -out ca.key 4096`: This command generates a new private key (ca.key) with a size of 4096 bits for the Certificate Authority (CA).
 * `openssl req -new -x509 -key ca.key -sha256 -subj "/C=DE/ST=HH/O=CA, Inc." -days 365 -out ca.crt`: This command creates a self-signed certificate (ca.crt) using the generated key (ca.key).
 * `openssl genrsa -out server.key 4096`: Generate a new private key for the server
